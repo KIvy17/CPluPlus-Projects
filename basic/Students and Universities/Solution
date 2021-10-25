@@ -1,0 +1,223 @@
+////////////////////////////////////////////////////////////////////////////////
+/// \file
+/// \brief      Main module for Contest 5 Problem A
+/// \author     Kovalyonok Ivan
+/// \version    3.2.0 with Univer structc (using Uni struct instead of std::map<string, vector<str>> UniList because of inconvenience , maybe check std::map)
+/// \date       30.03.2021
+///
+/// Students and Univers
+///
+////////////////////////////////////////////////////////////////////////////////
+
+#include <iostream>
+#include <vector>
+#include <string>
+#include <map>
+#include <algorithm>
+
+struct Applicant
+{
+    std::string name;
+    std::string surname;
+    int day;
+    int month;
+    int year;
+    int score;
+    int numberUni;
+    std::vector<std::string> preferences;
+};
+
+std::istream& operator>>(std::istream& inp, Applicant& applicant)
+{
+    inp >> applicant.name >> applicant.surname >> applicant.day >> applicant.month >> applicant.year
+        >> applicant.score >> applicant.numberUni;
+    std::string currentUniversity;
+    applicant.preferences.clear();
+    for (int i = 0; i < applicant.numberUni; ++i)
+    {
+        inp >> currentUniversity;
+        applicant.preferences.push_back(currentUniversity);
+        currentUniversity.clear();
+    }
+    return inp;
+}
+
+bool applicantSortUniver(const Applicant& lhv, const Applicant& rhv) //to sort in Univer
+{
+    if (lhv.surname < rhv.surname)
+    {
+        return true;
+    } else if (lhv.surname > rhv.surname)
+    {
+        return false;
+    }
+
+    if (lhv.name < rhv.name)
+    {
+        return true;
+    } else if (lhv.name > rhv.name)
+    {
+        return false;
+    }
+    return false;
+}
+
+bool applicantSortInp(const Applicant& lhv, const Applicant& rhv) //to sort in storage of applicants
+{
+    if (lhv.score > rhv.score)
+    {
+        return true;
+    } else if (lhv.score < rhv.score)
+    {
+        return false;
+    }
+
+    if (lhv.year < rhv.year)
+    {
+        return true;
+    } else if (lhv.year > rhv.year)
+    {
+        return false;
+    }
+
+    if (lhv.month < rhv.month)
+    {
+        return true;
+    } else if (lhv.month > rhv.month)
+    {
+        return false;
+    }
+
+    if (lhv.day < rhv.day)
+    {
+        return true;
+    } else if (lhv.day > rhv.day)
+    {
+        return false;
+    }
+
+    if (lhv.surname < rhv.surname)
+    {
+        return true;
+    } else if (lhv.surname > rhv.surname)
+    {
+        return false;
+    }
+
+    if (lhv.name < rhv.name)
+    {
+        return true;
+    } else if (lhv.name > rhv.name)
+    {
+        return false;
+    }
+    return false;
+}
+
+
+struct University
+{
+    std::string name;
+    int numberOfPlaces;
+    std::vector<Applicant> vecOfApplicants;
+
+    bool toCheckApply(const Applicant& applicant)
+    {
+        if (numberOfPlaces <= 0)
+        {
+            return false;
+        }
+        --numberOfPlaces;
+        vecOfApplicants.push_back(applicant);
+        return true;
+    }
+
+};
+
+std::istream& operator>>(std::istream& inp, University& university)
+{
+    inp >> university.name >> university.numberOfPlaces;
+    return inp;
+}
+std::ostream& operator<<(std::ostream& out, University& university)
+{
+    std::sort(university.vecOfApplicants.begin(), university.vecOfApplicants.end(), applicantSortUniver);
+    out << university.name;
+    for (const Applicant& applicant : university.vecOfApplicants)
+    {
+        out << '\t' << applicant.name << ' ' << applicant.surname;
+    }
+    return out;
+}
+
+struct DistributeStudents
+{
+    std::vector<Applicant> Applicants;
+    std::map<std::string, University> UniList;
+    int numberOfUni;
+    int numberOfApp;
+
+
+    void universityInput(std::istream& uInp)
+    {
+        University uni;
+        uInp >> numberOfUni;
+        for (int i = 0; i < numberOfUni; ++i)
+        {
+            uInp >> uni;
+            UniList[uni.name] = uni;
+        }
+    }
+
+    void applicantInput(std::istream& aInp)
+    {
+        Applicant app;
+        aInp >> numberOfApp;
+        for (int i = 0; i < numberOfApp; ++i)
+        {
+            aInp >> app;
+            Applicants.push_back(app);
+        }
+    }
+
+    void toOutput(std::ostream& outp)
+    {
+        for (std::map<std::string, University>::iterator it = UniList.begin(); it != UniList.end(); ++it)
+        {
+            outp << (*it).second << std::endl;
+        }
+    }
+
+    void applicantSort()
+    {
+        std::sort(Applicants.begin(), Applicants.end(), applicantSortInp);
+    }
+
+    void applicantsToDistr()
+    {
+        for (const Applicant& applicant : Applicants)
+        {
+            for (const std::string& uni : applicant.preferences)
+            {
+                if (UniList[uni].toCheckApply(applicant))
+                {
+                    break;                              // putting in applicants when checking possibility in method from
+                }
+            }
+        }
+    }
+
+};
+
+int main()
+{
+    DistributeStudents DistributeStudents;
+
+    DistributeStudents.universityInput(std::cin);
+    DistributeStudents.applicantInput(std::cin);
+    DistributeStudents.applicantSort();
+    DistributeStudents.applicantsToDistr();
+    DistributeStudents.toOutput(std::cout);
+
+    return 0;
+}
