@@ -1,0 +1,4 @@
+C:/Users/ivan2/Desktop/BigHWProga/project folder/build-gamesSales-Desktop_Qt_5_13_2MinGW_8_1_0_ext_32_bit-Debug/CMakeFiles/gamesSales.dir
+C:/Users/ivan2/Desktop/BigHWProga/project folder/build-gamesSales-Desktop_Qt_5_13_2MinGW_8_1_0_ext_32_bit-Debug/CMakeFiles/edit_cache.dir
+C:/Users/ivan2/Desktop/BigHWProga/project folder/build-gamesSales-Desktop_Qt_5_13_2MinGW_8_1_0_ext_32_bit-Debug/CMakeFiles/rebuild_cache.dir
+C:/Users/ivan2/Desktop/BigHWProga/project folder/build-gamesSales-Desktop_Qt_5_13_2MinGW_8_1_0_ext_32_bit-Debug/CMakeFiles/gamesSales_autogen.dir

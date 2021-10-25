@@ -1,0 +1,2 @@
+# Hashes of file build rules.
+aec4072eba59fbb09fa0960662c768cb CMakeFiles/gamesSales_autogen
