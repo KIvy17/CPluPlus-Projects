@@ -1,0 +1,27 @@
+Minimum on a segment
+Time limit	0.6 seconds
+Memory limit	64Mb
+Input	standard input or input.txt
+Output	standard output or output.txt
+Consider a sequence of integers of length n. The window with the length of k moves along it with step 1, that is, first in the window the first k numbers are visible,
+
+the next step in the « window » will be k numbers, starting with the second, and so on until the end of the sequence. It is required for each position of the « window » to determine the minimum in it.
+
+Input format
+The first line of input contains two natural numbers n and k (n ≤ 150000, k ≤ 10000, k ≤ n) - the length of the sequence and « window », respectively. The next line contains n numbers - the sequence itself.
+
+Output format
+The output data must contain n - k + 1 lines - the minimum for each position of the « window ».
+
+Sample
+Input	Output
+7 3
+1 3 2 4 5 3 1
+1
+2
+2
+3
+1
+Notes
+Please note that a solution with a direct calculation of the minimum for each window position will not pass in time. One way to solve the problem is to use the std::multiset container to store the contents of the window and quickly get the minimum. Read more about std::multiset here: http://en.cppreference.com/w/cpp/container/multiset.
+
