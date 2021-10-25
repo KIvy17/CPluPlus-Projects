@@ -1,0 +1,31 @@
+All permutations of a given length
+Time limit	1.5 seconds
+Memory limit	64Mb
+Input	standard input or input.txt
+Output	standard output or output.txt
+Given a given number N, print all permutations of numbers from 1 to N in lexicographical order.
+
+Input format
+Given N (0 <N <10).
+
+Output format
+Display all permutations of numbers from 1 to N in lexicographical order. Permutations are output one per line, numbers in permutation are output without spaces.
+
+Sample 1
+Input	Output
+1
+1
+Sample 2
+Input	Output
+2
+12
+21
+Sample 3
+Input	Output
+3
+123
+132
+213
+231
+312
+321
