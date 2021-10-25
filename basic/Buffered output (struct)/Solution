@@ -1,0 +1,37 @@
+#include "writer.h"
+#include <vector>
+#include <iostream>
+#include <vector>
+#include <string>
+
+class BufferedWriter : public Writer {
+
+public:
+    BufferedWriter(size_t buffer_size):_szUsed(buffer_size)
+    {
+        
+    }
+
+    ~BufferedWriter() 
+    {
+        Writer::write(_buffer.data(), _buffer.size());
+    }
+
+public:    
+    void write(const char* data, size_t len) override 
+    {
+        for (size_t i = 0; i < len; ++i) 
+        {
+            _buffer.push_back(*data);
+            ++data;
+            if (_szUsed == _buffer.size()) 
+            {
+                Writer::write(_buffer.data(), _szUsed);
+                _buffer.clear();
+            }
+        }
+    }
+    
+    std::vector<char> _buffer;
+    size_t _szUsed;
+};
