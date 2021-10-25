@@ -1,0 +1,40 @@
+Soundex
+Time limit	1 second
+Memory limit	64Mb
+Input	standard input or input.txt
+Output	standard output or output.txt
+The well-known Soundex algorithm (https://ru.wikipedia.org/wiki/Soundex) determines whether two English words are similar in sound. 
+At the entrance he takes the word and replaces it with some four-character code. If the codes of two words match, then the words, as a rule, sound similar.
+
+You need to implement this algorithm. It works like this:
+
+The first letter of the word is saved.
+The rest of the word:
+letters, denoting, as a rule, vowels: a, e, h, i, o, u, w и y — discarded;
+the remaining letters (consonants) are replaced with numbers from 1 to 6, with the same numbers corresponding to the sound of the letters:
+1: b, f, p, v
+2: c, g, j, k, q, s, x, z
+3: d, t
+4: l
+5: m, n
+6: r
+Any sequence of identical numbers is reduced to one such number.
+The final line is truncated to the first four characters. If the length of the string is less than the required, the missing characters are replaced by a 0.
+Examples:
+аmmonium → ammnm → a5555 → a5 → a500
+implementation → implmnttn → i51455335 → i514535 → i514
+
+Input format
+The input is one non-empty word, written in lowercase Latin letters. The word length does not exceed 20 characters.
+
+Output format
+Type a four-letter code for the word.
+
+Sample 1
+Input	Output
+ammonium
+a500
+Sample 2
+Input	Output
+implementation
+i514
