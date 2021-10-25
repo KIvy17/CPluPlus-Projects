@@ -1,0 +1,77 @@
+////////////////////////////////////////////////////////////////////////////////
+/// \file
+/// \brief      Main module for Contest 2 Problem C
+/// \author     Kovalyonok Ivan
+/// \version    0.1.0
+/// \date       04.02.2021
+///
+/// Copy the task description here.
+///
+////////////////////////////////////////////////////////////////////////////////
+
+#include <iostream>
+#include <string>
+#include <sstream>
+
+int main()
+{
+    std::string inp;
+    std::cin >> inp;
+    int len = inp.length();
+
+    for (int i = 1; i < len; ++i)
+    {
+        char check = inp[i];
+
+        if (check == 'a' || check  == 'e' || check == 'h' ||
+            check == 'i' || check  == 'o' || check == 'u' ||
+            check == 'w' || check == 'y')
+        {
+            inp.erase(inp.begin()+i);
+            i -= 1;
+        }
+        if(check =='p'||check =='b'||check =='f'||check =='v')
+            inp[i] ='1';
+        else if(check =='c'|| check =='s' ||check == 'q' ||check == 'k' ||check == 'g'||check =='j' ||check =='x'||check=='z')
+            inp[i] ='2';
+        else if(check =='m'||check =='n' )
+            inp[i] ='5';
+        else if(check=='d'||check=='t' )
+            inp[i] = '3';
+        else if(check =='l' )
+            inp[i] ='4';
+        else if(check =='r' )
+            inp[i] ='6';
+
+    }
+
+
+
+
+    for (size_t i = 1; i < inp.size(); ++i)
+    {
+        if(inp[i] == inp[i+1])
+        {
+            while(inp[i]==inp[i+1])
+                inp.erase(inp.begin()+i+1);
+        }
+
+
+    }
+
+
+    if (inp.size() < 4)
+    {
+
+        for (size_t i = 1; inp.size() < 4; ++i)
+        {
+            if (!inp[i])
+                inp.push_back('0');
+        }
+        std::cout << inp;
+     }
+    else
+        std::cout << inp[0]<<inp[1] << inp[2] <<  inp[3];
+
+    return 0;
+}
