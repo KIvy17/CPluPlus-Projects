@@ -1,0 +1,43 @@
+////////////////////////////////////////////////////////////////////////////////
+/// \file
+/// \brief      Main module for Contest 1 Problem F
+/// \author     Kovalyonok Ivan
+/// \version    0.1.0
+/// \date       25.01.2021
+///
+/// Windows...
+///
+////////////////////////////////////////////////////////////////////////////////
+
+#include<iostream>
+#include<vector>
+#include<set>
+
+int main()
+{
+  int n, k, number;
+  std::vector<int> storage;
+
+  std::cin >> n;
+  std::cin >> k;
+
+  for(size_t i = 0; i < n; ++i)
+  {
+    std::cin >> number;
+    storage.push_back(number);
+  }
+  std::multiset<int> compareWindow;
+
+  for(size_t i = 0; i < k; ++i)
+    compareWindow.insert(storage[i]);
+  std::cout << *compareWindow.begin() << std::endl;
+  
+  for(size_t i = k; i < n; ++i)
+  {
+    auto del = compareWindow.find(storage[i-k]);
+    compareWindow.erase(del);
+    compareWindow.insert(storage[i]);
+    std::cout << *compareWindow.begin() << std::endl;
+  }
+  return 0;
+}
