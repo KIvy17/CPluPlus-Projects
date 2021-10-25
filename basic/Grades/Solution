@@ -1,0 +1,79 @@
+#include <iostream>
+#include <map>
+#include <vector>
+#include <string>
+#include <cmath>
+
+std::vector<std::pair<std::string, size_t>> toCountStudents(const std::vector<std::pair<std::string, size_t>>& students)
+{
+    std::vector<std::pair<std::string, size_t>> people;
+
+    for (int i = 0; i < students.size(); ++i)
+    {
+        std::pair<std::string, size_t> element;
+        element.first = students[i].first;
+        element.second = 0;
+        if (people.size() == 0)
+            people.push_back(element);
+        else
+        {
+            int counter = 0;
+            for (size_t j = 0; j < people.size(); ++j)
+                if (element.first == people[j].first)
+                    ++counter;
+            if (counter == 0)
+                people.push_back(element);
+        }
+    }
+    return people;
+}
+
+int main()
+{
+    std::vector<std::pair<std::string, size_t>> students;
+
+
+    int NumberOfStudents = 0;
+    std::cin >> NumberOfStudents;
+
+    for (int i = 0; i < NumberOfStudents; ++i)
+    {
+        std::pair<std::string, size_t> people;
+        std::cin >> people.first;
+        std::cin >> people.second;
+        students.push_back(people);
+    }
+
+    std::vector<std::pair<std::string, size_t>> NumOfPeople = toCountStudents(students);
+    std::vector<std::pair<std::string, size_t>> counter = toCountStudents(students);
+    std::vector<std::pair<std::string, size_t>> sum = toCountStudents(students);
+
+    for (int i = 0; i < students.size(); ++i)
+    {
+        for (int j = 0; j < NumOfPeople.size(); ++j)
+            if (students[i].first == NumOfPeople[j].first && counter[j].second == 0)
+            {
+                NumOfPeople[j].second = students[i].second;
+                ++counter[j].second;
+                sum[j].second += students[i].second;
+
+                if (i == students.size() - 1)
+                    std::cout << NumOfPeople[j].second;
+                else
+                    std::cout << NumOfPeople[j].second << std::endl;
+            }
+            else if (students[i].first == NumOfPeople[j].first && counter[j].second != 0)
+            {
+                ++counter[j].second;
+                sum[j].second += students[i].second;
+                NumOfPeople[j].second = trunc(sum[j].second / counter[j].second);
+
+                if (i == students.size() - 1)
+                    std::cout << NumOfPeople[j].second;
+                else
+                    std::cout << NumOfPeople[j].second << std::endl;
+            }
+    }
+
+    return 0;
+}
