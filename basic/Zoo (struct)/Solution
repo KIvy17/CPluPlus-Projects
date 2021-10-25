@@ -1,0 +1,58 @@
+#ifndef ZOO_SAMPLE_H
+#define ZOO_SAMPLE_H
+
+#include "animals.h"
+
+#include <iostream>
+#include <stdexcept>
+#include <vector>
+#include <memory>
+
+
+using Zoo = std::vector<std::shared_ptr<Animal>>;
+
+
+Zoo createZoo()
+{
+    Zoo zoo;
+    std::string word;
+
+    while (std::cin >> word)
+    {
+        if (word == "Tiger")
+        {
+            std::shared_ptr<Tiger> ptrT(new Tiger);
+
+            zoo.push_back(ptrT);
+        }
+        else if (word == "Wolf")
+        {
+            //Wolf w;
+            std::shared_ptr<Wolf> ptrW(new Wolf);
+            zoo.push_back(ptrW);
+        }
+        else if (word == "Fox")
+        {
+            //Fox f;
+            std::shared_ptr<Fox> ptrF(new Fox);
+            zoo.push_back(ptrF);
+        }
+        else
+            throw std::runtime_error("Unknown animal!");
+    }
+
+    return zoo;
+}
+
+
+void process(const Zoo& zoo)
+{
+    for (const auto& animal : zoo)
+    {
+    
+        std::cout << animal->voice() << "\n";
+    }
+}
+
+
+#endif // ZOO_SAMPLE_H
