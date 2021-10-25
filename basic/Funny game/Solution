@@ -1,0 +1,59 @@
+////////////////////////////////////////////////////////////////////////////////
+/// \file
+/// \brief      Main module for Contest 4 Problem C
+/// \author     Kovalyonok Ivan
+/// \version    0.1.0
+/// \date       04.02.2021
+///
+/// Funny game lol
+///
+////////////////////////////////////////////////////////////////////////////////
+
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <math.h>
+
+std::vector<uint16_t> fillVecPermut(uint16_t a, std::vector<uint16_t> vec)
+{
+    vec.push_back(a);
+    int border = ceil(log2(a));
+    uint16_t mask = 0x1;
+    mask <<= border - 1;
+    for(int i = 0; i < border - 1; ++i)
+    {
+        if(a & mask)
+        {
+            a &= ~mask;
+            a <<= 1;
+            a |= 1;
+        }
+        else
+            a <<= 1;
+        vec.push_back(a);
+    }
+    return vec;
+}
+
+bool myComp(uint16_t a, uint16_t b)
+{
+    return a > b;
+}
+
+int main()
+{
+    uint16_t a;
+    std::cin >> a;
+    if (a == 0)
+        std::cout << 0;
+    else
+    {
+        std::vector<uint16_t> vecInt;
+        vecInt = fillVecPermut(a,vecInt);
+        std::sort(vecInt.begin(), vecInt.end(), myComp);
+        std::cout << vecInt[0];
+    }
+
+
+    return 0;
+}
