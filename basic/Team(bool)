@@ -1,0 +1,34 @@
+Team
+Time limit	2 seconds
+Memory limit	64Mb
+Input	standard input or input.txt
+Output	standard output or output.txt
+There are a total of m programming languages in the world. You have found a summary of n programmers, where it is written which languages each of them knows.
+
+You want to know how many sets of programmers exist such that for any programming language in the set there is a programmer who knows it.
+
+Input format
+The first line contains two integers separated by a space: n, m (1 ≤ n, m ≤ 22) is the number of programmers and programming languages, respectively. The following n lines contain m numbers separated by spaces. In the i th line, the j -th number is 1 if the programmer of i knows the language of j, or 0 if he does not.
+
+Output format
+Output one integer - the number of sets of programmers who know all languages totally.
+
+Sample 1
+Input	Output
+2 2
+1 0
+0 1
+1
+Sample 2
+Input	Output
+2 2
+1 1
+1 1
+3
+Sample 3
+Input	Output
+3 4
+1 1 1 0
+0 1 0 1
+1 0 1 1
+4
