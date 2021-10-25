@@ -1,0 +1,107 @@
+//#include "class.h"
+
+#include <iostream>
+#include <math.h>
+
+
+class Complex {
+public:
+    Complex()
+        : _realPart(0)
+        , _imPart(0)
+    {}
+    Complex(double realPart, double imPart)
+        : _realPart(realPart)
+        , _imPart(imPart)
+    {}
+
+    Complex(double somePart)
+        : _realPart(somePart)
+        , _imPart(0)
+    {}
+public:
+    double Re() const {
+        return _realPart;
+    };
+    double Im() const {
+        return _imPart;
+    };
+
+    Complex operator + (const Complex& number) const {
+        return Complex(_realPart + number._realPart, _imPart + number._imPart);
+    }
+    Complex operator + (double number ) const {
+        return Complex(_realPart + number, _imPart);
+    }
+    Complex operator - (const Complex& number) const {
+        return Complex(_realPart - number._realPart, _imPart - number._imPart);
+    }
+    Complex operator - (double number) const {
+        return Complex(_realPart - number, _imPart);
+    }
+    Complex operator * (const Complex& number) const {
+
+        return Complex(_realPart * number._realPart - _imPart * number._imPart, _realPart * number._imPart + _imPart * number._realPart);
+    }
+    Complex operator * (double i) const {
+        return Complex(_realPart * i, _imPart * i);
+    }
+    Complex operator / (const Complex& number) const {
+        double tmp = number._realPart * number._realPart + number._imPart * number._imPart;
+        return Complex((_realPart * number._realPart + _imPart * number._imPart)/tmp , (number._realPart * _imPart - _realPart * number._imPart)/ tmp);
+    }
+    bool operator == (const Complex& number) const {
+        return _realPart == number._realPart && _imPart == number._imPart;
+    }
+    bool operator != (const Complex& number) const {
+        return !(_realPart == number._realPart && _imPart == number._imPart);
+    }
+    Complex operator - () const {
+        return Complex(-_realPart, -_imPart);
+    }
+    Complex operator + () const {
+        return Complex(_realPart, _imPart);
+    }
+
+private:
+    double _realPart;
+    double _imPart;
+};
+
+std::ostream& operator << (std::ostream& outp, const Complex& number) {
+    if (number.Im() > 0)
+    {
+        outp << number.Re() << "+" << number.Im() << "i";
+    }
+    else if (number.Im() < 0)
+    {
+        outp << number.Re() << number.Im() << "i";
+    }
+    else
+    {
+        outp << number.Re();
+    }
+    return outp;
+}
+
+/// overload some more methods for comp.number and double at the same time...
+double abs(const Complex& number) {
+    return  std::sqrt(number.Re()*number.Re() + number.Im()*number.Im());
+}
+
+Complex operator + (double realAddj, const Complex& number) {
+    return Complex(number.Re() + realAddj, number.Im());
+}
+
+Complex operator - (double realExtr, const Complex& number) {
+    return Complex(realExtr - number.Re(), -number.Im());
+}
+
+Complex operator * (double i, const Complex& number) {
+    return Complex(number.Re() * i, number.Im() * i);
+}
+
+Complex operator / (Complex const &r, double const &i) {
+    return Complex(r.Re() / i, r.Im() / i);
+}
+
