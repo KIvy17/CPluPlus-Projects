@@ -1,0 +1,45 @@
+Admission
+Time limit	1 second
+Memory limit	256Mb
+Input	standard input or input.txt
+Output	standard output or output.txt
+Important: this task will have code review. You should follow the instruction, which is located here: https://clck.ru/TikNf
+
+
+Develop a program that distributes students to universities
+
+Each university has a limit of places, each applicant has a certain score and a list of preferences.
+
+The distribution is as follows: applicants are sorted by score in descending order, when score is equal - by date of birth, surname and name in increasing order.
+
+Then, each applicant goes to the first university from his list, which has vacant places left (if there are no such places, then goes nowhere).
+
+Input format
+The first line contains a single integer N from 1 to 104 - the number of universities.
+
+The next N lines contain a string of Latin letters from 5 to 15 characters and a number from 0 to 109 - the name and the maximum number of students for the next university.
+
+The next line contains an integer M from 0 to 104 - the number of applicants.
+
+Next come the M lines, each of which contains two words from 5 to 15 characters
+- the name and surname of the next applicant, then 3 integers from 0 to 109
+- day, month and year of birth, an integer from 0 to 109 is a student's score, an integer k from 0 to 200 is the number of universities to which the applicant is ready to enroll, and k of university names
+
+Output format
+For each university, print its name in alphabetical order, then, through tabulation, the first and last names of the students who entered it, sorted by surname, name and date of birth.
+
+Sample
+Input	Output
+3
+MSU 1
+HSE 2
+MIPT 100
+5
+Ivan Ivanov 1 1 1900 100 2 MSU HSE
+Petr Petrov 2 1 1900 90 2 MSU HSE
+Alexander Sidorov 3 1 1900 110 2 MIPT HSE
+Ivan Petrov 3 1 1900 100 3 HSE MSU MIPT
+Petr Ivanov 4 1 1900 80 1 HSE
+HSE	Ivan Petrov	Petr Petrov
+MIPT	Alexander Sidorov
+MSU	Ivan Ivanov
