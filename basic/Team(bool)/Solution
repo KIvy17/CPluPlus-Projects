@@ -1,0 +1,84 @@
+////////////////////////////////////////////////////////////////////////////////
+/// \file
+/// \brief      Main module for Contest 1 Problem F
+/// \author     Kovalyonok Ivan
+/// \version    0.1.0
+/// \date       25.01.2021
+///
+/// Team
+///
+////////////////////////////////////////////////////////////////////////////////
+
+#include <iostream>
+#include <vector>
+#include <set>
+#include <math.h>
+//TODO: 1) считываем числа и представляем в 10
+//      2) добавляем в сет
+//      3) создаем PowerSet и заводим счетчик
+//      4) проверяем каждый эл PowerSet  на соответствие: el == pow(2,k) - 1
+//      если равно - то ++counter;
+
+std::vector<int> findAllOR(std::vector<int>& vec, int n)        //(3)
+{
+    std::vector<int> powerVec;
+    long long  bitCount = 1<<n;                                    //managing all possible subsequences of bitwise.
+
+    for (long long  i = 0; i < bitCount; ++i)
+    {
+        long long anotherOperBit = 0;
+        for (int j = 0; j < n; ++j)
+            if (i & (1<<j))
+                anotherOperBit |= vec[j];
+        if(anotherOperBit > 0)
+            powerVec.push_back(anotherOperBit);
+    }
+    return powerVec;
+}
+
+void countORs(const std::vector<int>& powerVec, int k)
+{
+    int counter = 0;
+
+    for(int el : powerVec)
+    {
+        if(el == pow(2,k) - 1)
+            ++counter;
+    }
+    std::cout << counter; //<< std::endl;
+}
+
+
+void printVec(const std::vector<int>& v)
+{
+    for(size_t i = 0; i < v.size(); ++i)
+    {
+        std::cout << v[i] << ", ";
+    }
+}
+
+int main()
+{
+    int n,k,tmp;
+
+    std::cin >> n >> k;
+
+    std::vector<int> vecOfLang;
+    for(int i = 0; i < n; ++i)
+    {
+        int anotherElement = 0;                         //(1)
+        for(int j = 0; j < k; ++j)
+        {
+            std::cin >> tmp;
+            anotherElement += tmp * pow(2,k - j -1);
+        }
+        vecOfLang.push_back(anotherElement);               //(2)
+    }
+
+    countORs(findAllOR(vecOfLang, n), k);
+    std::vector<int> newVec = findAllOR(vecOfLang, k);
+    //printVec(newVec);
+
+
+  return 0;
+}
