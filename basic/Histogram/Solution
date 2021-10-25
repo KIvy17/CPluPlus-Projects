@@ -1,0 +1,79 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <algorithm>
+
+
+//void Outpo();
+
+int countSymbols(std::string& inp)
+{
+ int k = 0;
+ for (size_t i = 0; i < inp.size(); ++i)
+  if (inp[0] == inp[i])
+   ++k;
+ return k;
+}
+
+int main()
+{
+ std::string tmp;
+ std::string input;
+ std::vector <std::pair<char, std::vector<char>>> gist;
+
+ while (std::getline(std::cin, tmp))
+  input += tmp;
+
+ input.erase(std::remove(input.begin(), input.end(), ' '), input.end());
+
+ while (input.size() != 0)
+ {
+  std::pair<char, std::vector<char>> element;
+  element.first = input[0];
+
+  int counter = countSymbols(input);
+
+  for (int i = 0; i < counter; ++i)
+   element.second.push_back('#');
+
+  gist.push_back(element);
+  input.erase(std::remove(input.begin(), input.end(), element.first), input.end());
+ }
+
+ for (size_t i = 0; i < gist.size(); ++i)
+  for (size_t j = 0; j < gist.size() - i - 1; ++j)
+   if (gist[j].first > gist[j + 1].first)
+   {
+    auto cur = gist[j];
+    gist[j] = gist[j + 1];
+    gist[j + 1] = cur;
+   }
+
+ int maxGist = 0;
+ for (int i = 0; i < gist.size(); ++i)
+  if (maxGist < gist[i].second.size())
+   maxGist = gist[i].second.size();
+
+ for (int i = 0; i < gist.size(); ++i)
+ {
+  if (maxGist > gist[i].second.size())
+  {
+   int size = gist[i].second.size();
+   gist[i].second.resize(maxGist);
+   for (int j = size; j < maxGist; ++j)
+    gist[i].second[j] = ' ';
+  }
+ }
+
+ for (int i = maxGist - 1; i > -1; --i)
+ {
+  for (int j = 0; j < gist.size(); ++j)
+   std::cout << gist[j].second[i];
+  std::cout << std::endl;
+ }
+
+ for (size_t i = 0; i < gist.size(); ++i)
+  std::cout << gist[i].first;
+
+ return 0;
+}
