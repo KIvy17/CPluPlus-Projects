@@ -1,0 +1,49 @@
+////////////////////////////////////////////////////////////////////////////////
+/// \file
+/// \brief      Main module for Contest 4 Problem D
+/// \author     Kovalyonok Ivan
+/// \version    0.1.0
+/// \date       04.02.2021
+///
+/// permutasii
+///
+////////////////////////////////////////////////////////////////////////////////
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+typedef std::vector<std::vector<int>> VecInt;
+int main()
+{
+    int n;
+    std::cin >> n;
+    std::vector<int> vec;
+    VecInt outp;
+
+    for(int i = 1; i <=n; ++i)
+    {
+
+        vec.push_back(i);
+        std::sort(vec.begin(),vec.end());                           //<algorithm>
+        do
+        {
+            outp.push_back(vec);
+        }
+        while(std::next_permutation(vec.begin(),vec.end()));        //<algorithm>
+
+    }
+    for(std::vector<int> vector : outp)
+    {
+        if(vector.size() == n)
+        {
+            for(int el : vector)
+            {
+
+                std::cout << el;
+            }
+            std::cout << std::endl;
+        }
+    }
+
+    return 0;
+}
