@@ -1,0 +1,18 @@
+Zoo
+Time limit	1 second
+Memory limit	64Mb
+Input	standard input or input.txt
+Output	standard output or output.txt
+You work with a hierarchy of classes describing animals: https://gist.github.com/pumpkin-code/6666e588b18d0674ee093a65921621ad.
+
+You need to determine the type of Zoo, which is a set of different animals, and write two functions: Zoo createZoo () and void process (const Zoo & zoo).
+
+The createZoo function should read the words from standard input. If input words are Tiger, Wolf or Fox, it must place the corresponding beast to the zoo. If another word comes in, it should stop reading and throw an exception std::runtime_error.
+
+The process function should iterate over all the animals in the zoo in order of creation and print the result of the virtual function voice for each of them.
+
+Your colleague wrote this code, but for some reason it does not work: https://gist.github.com/pumpkin-code/4bf4758372d20c243070700b98ddac4a. Correct it and submit it to the system.
+
+Notes
+You don’t need to rewrite the code for the classes from the animals.h file, just include the header file animals.h. Please note that in our version of the animals.h file, the voices of the animals may differ from what is shown in the example. Of course, there should be no memory leaks in your program. Function createZoo should create only one object for each input word.
+
